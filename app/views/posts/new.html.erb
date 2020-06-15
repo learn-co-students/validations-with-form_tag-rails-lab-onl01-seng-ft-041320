@@ -1,0 +1,32 @@
+<h2>New Post</h2>
+<%if @post.errors.any?%>
+  <ul>
+    <%@post.errors.full_messages.each do |msg|%>
+      <li><%=msg%></li>
+    <%end%>
+  </ul>
+<%end%>
+<%= form_tag posts_path, method: 'post' do %>
+  <div class="field <%=@title_err%>">
+    <%= label_tag "title", "Title" %>
+    <%= text_field_tag :title %>
+  </div><br>
+
+  <div class="field <%= @category_err%>">
+    <%= label_tag "category", "Category" %>
+    <p>Must be either "Fiction" or "Non-Fiction".</p>
+    <%= text_field_tag :category %>
+    <p>
+      Please type carefully as our top scientists are working around the clock to
+      enable state-of-the-art dropdown technology for this form field.
+    </p>
+  </div><br>
+
+  <div class="field <%=@content_err%>">
+    <%= label_tag "content", "Content" %>
+    <br />
+  <%= text_area_tag :content %>
+</div>
+<br>
+<%= submit_tag 'Create Post'%>
+<% end %>
